@@ -1,0 +1,17 @@
+(load "square.ss")
+
+(define (cubert x)
+    (define (cubert-iter guess x)
+        (if (good-enough? guess x)
+            guess
+            (cubert-iter (improve guess x) x)
+        )
+    )
+    (define (improve y x)
+        (/ (+ (/ x (square y)) (* 2 y)) 3)
+    )
+    (define (good-enough? guess x)
+        (< (abs (- (cube guess) x)) 0.001)
+    )
+    (cubert-iter 1.0 x)
+)

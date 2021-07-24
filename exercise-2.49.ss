@@ -1,0 +1,23 @@
+(load "exercise-2.48.ss")
+
+(define (frame-coord-map frame)
+    (lambda (v)
+        (add-vect (origin-frame frame)
+                  (add-vector (scale-vecotr (xcor-vector v) (edge1-frame frame))
+                              (scale-vecotr (ycor-vector v) (edge2-frame frame))
+                  )
+        )
+    )
+)
+
+(define (segments->painter segment-list)
+    (lambda (frame)
+        (for-each (lambda (segment)
+                      (draw-line ((frame-coord-map frame) (start-segment segment))
+                                 ((frame-coord-map frame) (end-segment segment))
+                      )
+                  )
+                  segment-list
+        )
+    )
+)

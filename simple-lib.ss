@@ -1,0 +1,11 @@
+(library (simple-lib)
+  (export empty-set)
+  (import (rnrs))
+  (define empty-set '())
+)
+
+(library (doris-lib)
+  (export doris)
+  (import (rnrs))
+  (define doris "love")
+)

@@ -1,0 +1,1 @@
+(define (f x) (load "zzz.ss") (display a))

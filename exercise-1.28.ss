@@ -1,0 +1,25 @@
+(load "square.ss")
+
+(define (miller-check n trails)
+    (cond ((= trails 0) #t)
+          ((fermat-test n) (miller-check n (- trails 1)))
+          (else #f)            
+    )
+)
+
+(define (fermat-test n)
+    (define (try a)
+        (= (expmod a (- n 1) n) 1)
+    )
+    (try (+ (random (- n 1)) 1))
+)
+
+(define (expmod base exp m)
+    (if (= exp 0)
+        1
+        (if (even? exp)
+            (remainder (square (expmod base (/ exp 2) m)) m)
+            (remainder (* base (expmod base (- exp 1) m)) m)
+        )
+    )
+)

@@ -1,0 +1,36 @@
+(define (expt-v1 b n)
+    (if (= n 0)
+        1
+        (* b expt (- n 1))
+    )
+)
+
+(define (expt-v2 b n)
+    (define (iter product counter)
+        (if (= n 0)
+            product
+            (iter (* b product) (- counter 1))
+        )
+    )
+    (iter 1 n)
+)
+
+(define (expt-fast-v1 b n)
+    (cond ((= n 0) 1)
+          ((even? n) (square (expt-fast-v1 b (/ n 2))))
+          (else (* b (expt-fast-v1 b (- n 1))))
+    )
+)
+
+(define (expt-fast-v2 b n)
+    (define (iter b n a)
+        (if (= n 0)
+            a
+            (if (even? n)
+                (iter (square b) (/ n 2) a)
+                (iter b (- n 1) (* b a))
+            )
+        )
+    )
+    (iter b n 1)
+)
